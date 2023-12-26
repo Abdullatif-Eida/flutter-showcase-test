@@ -1,3 +1,4 @@
+import 'package:flutter_demo/features/auth/domain/use_cases/log_in_use_case.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'app_init_mock_definitions.dart';
@@ -16,7 +17,7 @@ class AppInitMocks {
   // USE CASES
   static late MockAppInitFailure appInitFailure;
   static late MockAppInitUseCase appInitUseCase;
-
+  static late LogInUseCase logInUseCase;
   //DO-NOT-REMOVE USE_CASE_MOCKS_STATIC_FIELD
 
   // REPOSITORIES

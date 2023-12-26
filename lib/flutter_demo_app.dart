@@ -38,7 +38,7 @@ class _FlutterDemoAppState extends State<FlutterDemoApp> {
       localeListResolutionCallback: localeResolution,
       supportedLocales: AppLocalizations.supportedLocales,
       builder: (context, child) => MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+        data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(1.0)),
         child: child!,
       ),
     );
