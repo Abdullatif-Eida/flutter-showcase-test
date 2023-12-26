@@ -18,11 +18,9 @@ Future<void> main() async {
   late LoginPresenter presenter;
   late LoginNavigator navigator;
 
-  void _initMvp() {
+  void initMvp() {
     initParams = const LoginInitialParams();
-    model = LoginPresentationModel.initial(
-      initParams,
-    );
+    model = LoginPresentationModel.initial();
     navigator = LoginNavigator(Mocks.appNavigator);
     presenter = LoginPresenter(model, navigator, AppInitMocks.logInUseCase, UserStore());
     page = LoginPage(presenter: presenter);
@@ -31,13 +29,13 @@ Future<void> main() async {
   await screenshotTest(
     "login_page",
     setUp: () async {
-      _initMvp();
+      initMvp();
     },
     pageBuilder: () => page,
   );
 
   test("getIt page resolves successfully", () async {
-    _initMvp();
+    initMvp();
     final page = getIt<LoginPage>(param1: initParams);
     expect(page.presenter, isNotNull);
     expect(page, isNotNull);

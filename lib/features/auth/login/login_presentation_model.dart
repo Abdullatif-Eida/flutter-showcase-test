@@ -1,15 +1,12 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter_demo/core/domain/model/app_init_failure.dart';
 import 'package:flutter_demo/core/domain/model/user.dart';
 import 'package:flutter_demo/core/utils/bloc_extensions.dart';
 import 'package:flutter_demo/features/auth/domain/model/log_in_failure.dart';
-import 'package:flutter_demo/features/auth/login/login_initial_params.dart';
 
 class LoginPresentationModel implements LoginViewModel {
   // Constructor
-  LoginPresentationModel.initial(
-    LoginInitialParams initialParams,
-  )   : appInitResult = const FutureResult.empty(),
+  LoginPresentationModel.initial()
+      : appInitResult = const FutureResult.empty(),
         username = '',
         password = '';
 

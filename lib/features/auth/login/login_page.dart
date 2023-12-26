@@ -24,9 +24,9 @@ class LoginPage extends StatefulWidget with HasPresenter<LoginPresenter> {
 const initParams = LoginInitialParams();
 
 class _LoginPageState extends State<LoginPage> with PresenterStateMixin<LoginViewModel, LoginPresenter, LoginPage> {
-  final LoginPresentationModel _presentationModel = LoginPresentationModel.initial(initParams); // Initialize the presentation model
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+// Initialize the presentation model
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Padding(
