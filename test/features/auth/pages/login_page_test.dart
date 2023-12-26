@@ -1,3 +1,4 @@
+import 'package:flutter_demo/core/domain/stores/user_store.dart';
 import 'package:flutter_demo/dependency_injection/app_component.dart';
 import 'package:flutter_demo/features/auth/login/login_initial_params.dart';
 import 'package:flutter_demo/features/auth/login/login_navigator.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../../mocks/mocks.dart';
 import '../../../test_utils/golden_tests_utils.dart';
+import '../../app_init/mocks/app_init_mocks.dart';
 
 Future<void> main() async {
   late LoginPage page;
@@ -22,10 +24,7 @@ Future<void> main() async {
       initParams,
     );
     navigator = LoginNavigator(Mocks.appNavigator);
-    presenter = LoginPresenter(
-      model,
-      navigator,
-    );
+    presenter = LoginPresenter(model, navigator, AppInitMocks.logInUseCase, UserStore());
     page = LoginPage(presenter: presenter);
   }
 

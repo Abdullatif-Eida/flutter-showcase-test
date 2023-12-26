@@ -1,20 +1,55 @@
+import 'package:dartz/dartz.dart';
+import 'package:flutter_demo/core/domain/model/app_init_failure.dart';
+import 'package:flutter_demo/core/domain/model/user.dart';
+import 'package:flutter_demo/core/utils/bloc_extensions.dart';
+import 'package:flutter_demo/features/auth/domain/model/log_in_failure.dart';
 import 'package:flutter_demo/features/auth/login/login_initial_params.dart';
 
-/// Model used by presenter, contains fields that are relevant to presenters and implements ViewModel to expose data to view (page)
 class LoginPresentationModel implements LoginViewModel {
-  /// Creates the initial state
+  // Constructor
   LoginPresentationModel.initial(
-    // ignore: avoid_unused_constructor_parameters
     LoginInitialParams initialParams,
-  );
+  )   : appInitResult = const FutureResult.empty(),
+        username = '',
+        password = '';
 
-  /// Used for the copyWith method
-  LoginPresentationModel._();
+  // Private constructor for copyWith
+  LoginPresentationModel._({
+    required this.appInitResult,
+  });
+  final FutureResult<Either<LogInFailure, User>> appInitResult;
 
-  LoginPresentationModel copyWith() {
-    return LoginPresentationModel._();
+  @override
+  String username = ''; // Initialize with empty string
+  @override
+  String password = ''; // Initialize with empty string
+
+  @override
+  bool get isLoginEnabled => username.isNotEmpty && password.isNotEmpty;
+  @override
+  bool get isLoading => appInitResult.isPending();
+
+  LoginPresentationModel copyWith({
+    bool? isLoginEnabled,
+    String? username,
+    String? password,
+    FutureResult<Either<LogInFailure, User>>? appInitResult,
+  }) {
+    return LoginPresentationModel._(appInitResult: appInitResult ?? this.appInitResult)
+      ..username = username ?? this.username
+      ..password = password ?? this.password;
+  }
+
+  void updateFields(String newUsername, String newPassword) {
+    username = newUsername; // Update username
+    password = newPassword; // Update password
+    copyWith(username: newUsername, password: newPassword);
   }
 }
 
-/// Interface to expose fields used by the view (page).
-abstract class LoginViewModel {}
+abstract class LoginViewModel {
+  String get username;
+  String get password;
+  bool get isLoginEnabled;
+  bool get isLoading;
+}
